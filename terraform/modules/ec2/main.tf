@@ -18,6 +18,7 @@ data "aws_ami" "ubuntu" {
 resource "aws_instance" "web" {
   count                   = length(var.subnet_ids)
   ami                     = data.aws_ami.ubuntu.id
+  key_name                = "us-connect.pem"
   instance_type           = var.instance_type
   subnet_id               = var.subnet_ids[count.index]
   vpc_security_group_ids  = [var.security_group_id]
@@ -27,8 +28,9 @@ resource "aws_instance" "web" {
               #!/bin/bash
               apt-get update -y
               apt-get install -y docker.io
-              systemctl enable docker
-              systemctl start docker
+              sudo systemctl enable docker
+              sudo systemctl start docker
+              sudo usermod -aG docker ubuntu
               docker pull devopstimi/focusflow-cicd:14
               docker run -d -p 5000:5000 --restart unless-stopped devopstimi/focusflow-cicd:14
               EOF
