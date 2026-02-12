@@ -7,7 +7,7 @@ AWS_REGION="us-east-1"
 
 # Create S3 bucket for Terraform state (MUST be globally unique)
 # Replace with your own unique name
-BUCKET_NAME="infra-terraform-state"
+BUCKET_NAME="timi-infra-terraform-state"
 
 aws s3api create-bucket \
   --bucket $BUCKET_NAME \
