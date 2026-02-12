@@ -15,8 +15,7 @@ module "vpc" {
 # Security
 module "security" {
   source   = "../../modules/sec_grp"
-  vpc_id   = module.vpc.vpc_id
-  my_ip    = "YOUR_PUBLIC_IP/32"  # replace with your IP for SSH
+  vpc_id   = module.vpc.vpc_id  
 }
 
 # EC2
